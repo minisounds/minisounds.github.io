@@ -4,8 +4,8 @@
     --link-color: #1a1a1a;
     --max-width: 800px;
     --horizontal-padding: 2rem;
-    --nav-width: 1200px;  /* Wider width for navigation */
-    --card-background: #dbd9d6; /* New variable for project cards */
+    --nav-width: 1200px;
+    --card-background: #dbd9d6;
 }
 
 /* Base Styles */
@@ -16,6 +16,7 @@ body {
     padding: 0;
     background-color: var(--background-color);
     color: var(--text-color);
+    -webkit-text-size-adjust: 100%;
 }
 
 /* Navigation Styles */
@@ -24,10 +25,10 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem var(--horizontal-padding);
-    max-width: var(--nav-width);  /* Wider nav container */
+    max-width: var(--nav-width);
     margin: 0 auto;
+    flex-wrap: wrap;
 }
-
 
 .nav-left {
     font-weight: 500;
@@ -55,15 +56,26 @@ nav {
 .nav-right {
     display: flex;
     gap: 1.5rem;
-    margin-right: 2rem;  /* Push social icons more to the right */
+    margin-right: 2rem;
+    align-items: center;
 }
 
 .nav-right a {
     color: var(--text-color);
     text-decoration: none;
+    line-height: 0;
+    display: inline-flex;
+    align-items: center;
 }
 
-/* Container Styles - Main content remains centered */
+/* Navigation Icon Specific Styles */
+.nav-icon {
+    width: 20px !important;
+    height: 20px !important;
+    object-fit: contain;
+}
+
+/* Container Styles */
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -73,12 +85,12 @@ nav {
 /* Profile Section Styles */
 .profile-section {
     display: flex;
-    gap: 3rem;  /* Reduced from 4rem to match reference */
+    gap: 3rem;
     margin-bottom: 3rem;
 }
 
 .profile-image {
-    flex: 0 0 300px;  /* Reduced from 400px to match reference */
+    flex: 0 0 300px;
 }
 
 .profile-image img {
@@ -91,7 +103,7 @@ nav {
     margin-top: 0;
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;  /* Reduced from default to bring location closer */
+    margin-bottom: 0.5rem;
 }
 
 .profile-content .location {
@@ -117,11 +129,11 @@ nav {
     margin-top: 0;
 }
 
-/* Refined style for the conference tag */
+/* Conference tag style */
 .conference-tag {
-    color: #888;  /* Lighter than previous #666 */
+    color: #888;
     font-weight: normal;
-    font-size: 0.9em;  /* 90% of the parent font size */
+    font-size: 0.9em;
 }
 
 /* Social Links Styles */
@@ -141,32 +153,12 @@ nav {
     text-decoration: underline;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    nav {
-        padding: 1rem;
-    }
-    
-    .nav-left {
-        margin-left: 0;
-    }
-    
-    .nav-right {
-        margin-right: 0;
-    }
-    
-    .nav-center {
-        position: static;
-        transform: none;
-    }
-}
-
 /* Blog Post Styling */
 .coming-soon-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 100px); /* Full height minus nav */
+    min-height: calc(100vh - 100px);
 }
 
 .coming-soon {
@@ -202,9 +194,108 @@ nav {
     color: #666;
 }
 
-/* Add this new style for navigation icons */
-.nav-icon {
-    width: 20px;  /* Set desired width */
-    height: 20px; /* Set desired height */
-    object-fit: contain; /* Maintain aspect ratio */
+/* Media Queries */
+@media (max-width: 768px) {
+    :root {
+        --horizontal-padding: 1rem;
+    }
+
+    nav {
+        padding: 1rem;
+        justify-content: center;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .nav-left, .nav-right {
+        margin: 0;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .nav-center {
+        position: static;
+        transform: none;
+        width: 100%;
+        order: -1;
+    }
+
+    .nav-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .profile-section {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .profile-image {
+        flex: 0 0 auto;
+        max-width: 100%;
+    }
+
+    .container {
+        padding: 1rem var(--horizontal-padding);
+    }
+
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        margin: 0.5rem;
+    }
+}
+
+/* iPad/Tablet Specific Adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .profile-section {
+        gap: 2rem;
+    }
+
+    .profile-image {
+        flex: 0 0 250px;
+    }
+
+    .container {
+        padding: 1.5rem var(--horizontal-padding);
+    }
+}
+
+/* Small Phone Adjustments */
+@media (max-width: 480px) {
+    .profile-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .project-card {
+        padding: 1.25rem;
+    }
+
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-links a {
+        margin: 0.5rem 0;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .nav-left a,
+    .social-links a,
+    .project-card {
+        transition: none;
+    }
+    
+    .nav-right a,
+    .social-links a {
+        padding: 0.5rem;
+    }
 }
