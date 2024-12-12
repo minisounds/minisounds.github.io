@@ -5,25 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Jason Zhang</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
 </head>
 <body>
     <nav>
-        <div class="nav-left">Blog</div>
-        <div class="nav-center">Jason Zhang</div>
+        <div class="nav-left">
+            <a href="index.html">Home</a>
+        </div>
+        
+        <div class="nav-center">
+            Jason Zhang
+        </div>
+        
         <div class="nav-right">
-            <a href="#" aria-label="Twitter">𝕏</a>
-            <a href="#" aria-label="GitHub">⌨</a>
-            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="https://x.com/minisounds" aria-label="Twitter">
+                <img src="media/twitter.png" alt="Twitter Logo" class="nav-icon">
+            </a>
+            <a href="https://scholar.google.com/citations?user=LY1rce8AAAAJ&hl=en&authuser=1" aria-label="GitHub">
+                <img src="media/googlescholar.svg" alt="GitHub Logo" class="nav-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/jason-zhang-6860361b8/" aria-label="LinkedIn">
+                <img src="media/linkedin.png" alt="LinkedIn Logo" class="nav-icon">
+            </a>
         </div>
     </nav>
 
-    <main class="container coming-soon-container">
-        <div class="coming-soon">
-            <h1>Coming Soon</h1>
-            <p>Thoughts on AI, research, and technology.</p>
-            <div class="back-link">
-                <a href="home.html">← Back to home</a>
+    <main class="container">
+        <div class="blog-posts">
+            <h1>Blog Posts</h1>
+
+            <div class="blog-post-card">
+                <h3>
+                    <a href="blog_posts/benchmarks.html">Building Better Benchmarks: We Need Standardized AI Evaluation</a>
+                </h3>
+                <p class="post-date">December 11, 2024</p>
+                <p>
+                    AI benchmarking is in a state of disarray. From data leakage to reproducibility issues, our current evaluation methods raise serious questions about how we measure AI capabilities. This post explores the limitations of today's benchmarks and proposes a unified set of best practices for moving forward.
+                </p>
             </div>
         </div>
     </main>

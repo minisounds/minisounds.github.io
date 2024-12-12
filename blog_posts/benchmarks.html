@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Better Benchmarks - Jason Zhang</title>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="../blog.html">← Blog</a>
+        </div>
+        
+        <div class="nav-center">
+            Jason Zhang
+        </div>
+        
+        <div class="nav-right">
+            <a href="https://x.com/minisounds" aria-label="Twitter">
+                <img src="../media/twitter.png" alt="Twitter Logo" class="nav-icon">
+            </a>
+            <a href="https://scholar.google.com/citations?user=LY1rce8AAAAJ&hl=en&authuser=1" aria-label="GitHub">
+                <img src="../media/googlescholar.svg" alt="GitHub Logo" class="nav-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/jason-zhang-6860361b8/" aria-label="LinkedIn">
+                <img src="../media/linkedin.png" alt="LinkedIn Logo" class="nav-icon">
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <article class="blog-post">
+            <figure class="post-banner">
+                <img src="../media/bench_bkgrd.jpg" alt="AI Benchmarking concept visualization">
+                <!-- <figcaption>Image: AI Benchmarking Visualization</figcaption> -->
+            </figure>
+
+            <h1>Building Better Benchmarks: Towards Standardized AI Evaluation</h1>
+            <div class="post-metadata">
+                Jason Zhang <br>
+                December 11, 2024
+            </div>
+
+            <p>
+                AI is here in full force. As our models grow increasingly sophisticated, our need for reliable benchmarking has never been more critical - yet the current benchmarking landscape resembles a patchwork of disparate approaches. A quick look at today’s <a href="https://huggingface.co/collections/clefourrier/llm-evaluation-datasets-64f9c369d3cd204ddde40ef8" target="_blank">AI benchmarks</a> show a breadth of inconsistencies in reproducibility standards, accessibility protocol, benchmarking structure, and safeguards against data contamination. This doesn’t just complicate our ability to meaningfully compare models with each other; it casts doubt on the value proposition of using these benchmarks altogether. If we want a shot at understanding these models and what they are truly capable of, we as a field must adopt a unified set of best practices for how we approach benchmark development and use moving forward. </p>
+            <p>
+                In this post, I discuss what I believe to be the main limitations of today’s benchmarks, and compile a list of best practices for the field of benchmarking to adopt for a more unified and rigorous approach to AI evaluation. 
+            </p>
+            <h2>1. Data Leakage</h2>
+            <p> 
+                Models are getting trained on the same questions they’re being tested on. This happens in two ways: direct exposure in pre-training data from web-scraping and indirect exposure through iterative training on user interactions. Recent research paints a troubling picture: these two forms of data leakage have leaked an estimated <i>4.7 million benchmark questions across 263 benchmarks </i>to models like GPT 3.5 and 4 [<a href="https://arxiv.org/pdf/2402.03927" target="_blank">Leak, Cheat, Repeat</a>]. This could explain why models like GPT-3.5 Turbo have been found to achieve 57% accuracy in reproducing masked incorrect answer choices in the MMLU [<a href="https://openreview.net/pdf?id=a34bgvner1" target="_blank">Benchmark Probing</a>] or entire evaluation questions when provided with a URL hint [<a href="https://aclanthology.org/2024.naacl-long.482" target="_blank">Investigating Data Contamination</a>]. <br><br>
+                The implications of this? Saturated benchmark scores and inflated perceptions of what these models are capable of. A striking example comes from the release of Apple’s recent <a href="https://arxiv.org/abs/2410.05229v1" target="_blank">GSM-Symbolic</a> paper, where researchers experimented with making minor modifications to the GSM8k, a widely-used reasoning benchmark consisting of grade-school math problems. Despite apparent steady improvements in model performance on the GSM8k over time, researchers found that simply changing character names or adding seemingly relevant but ultimately inconsequential details led to significant performance degradation across models. This vulnerability isn’t unique - other research has shown that simply reordering multiple-choice answers on other benchmarks like the MMLU can introduce substantial variance to model outputs and cause them to drop up to eight positions on benchmark leaderboard rankings [<a href="https://arxiv.org/pdf/2402.01781" target="_blank">Benchmarks are Targets</a>]. These findings suggest that current static and contaminated benchmarks are testing for all the wrong things — measuring models' ability to memorize and benchmark specific patterns rather than execute compositional, generalizable reasoning.
+            </p>
+            <h2>2. Reproducibility</h2>
+            <p>
+                Reproducing evaluations from scratch is hard. There are so many ways that things can go wrong in the workflow - from slight variations in model prompting, tweaks made to hyperparameter configurations, or LM hallucination during answer extraction. [<a href="https://www.anthropic.com/research/evaluating-ai-systems" target="_blank">Evaluating AI Systems</a>] This has proven to be a significant problem across the field - recent studies have shown that up to 76% of papers using ROUGE evaluations had provably incorrect scores, an unsurprising result given that only 20% of the papers implementing the evaluation provided ample information for effective reproduction. [<a href="https://aclanthology.org/2023.acl-long.107.pdf" target="_blank">Rogue Scores</a>] This challenge extends far beyond just a single metric - across various benchmarks and implementations of them, researchers frequently omit crucial implementation details that place strain on the field’s ability to validate and build upon published results. [<a href="https://arxiv.org/abs/2407.04069" target="_blank">A Systematic Survey and Critical Review of LMs</a>]
+            </p>
+            <h2>Blazing Productive Paths Forward</h2>
+            <p>
+                So are benchmarks a doomed practice? I don’t think so. They have the potential to serve as a useful metric for us to universally evaluate the capabilities of LMs if done right. But given the challenges discussed today, benchmarks today are just simply not that compelling. Here’s how I think we can move forward as a field: 
+            </p>
+            <h3>On Handling Data Contamination / Memorization: </h3>
+            <ol>
+                <li><strong>Standardized Memorization Scores or Contamination Guarantees from Model Developers:</strong> The community has developed robust methods for detecting training data contamination, ranging from <a href="https://arxiv.org/pdf/2311.04850" target="_blank">n-gram & LM pair scrubbing</a> to <a href="https://aclanthology.org/2024.naacl-long.482" target="_blank">Test Slot Guessing</a> to <a href="https://arxiv.org/abs/2408.14352" target="_blank">Log Likelihood Probing on QA pairs</a>. By consolidating these techniques into a standardized contamination metric, we can establish a new precedent: requiring frontier model developers to provide comprehensive contamination guarantees for each model release. While this was previously done with GPT-3 and Llama 2, it hasn’t been done since and reviving this practice can provide much-needed transparency that would benefit the entire field of AI. </li>
+                <li><strong>Securing Evaluation Data: </strong>The widespread availability of evaluation test data on the internet undermines the validity of benchmarking. Evaluation data simply needs to be secured. Microsoft’s <a href="https://arxiv.org/abs/2403.00393v2" target="_blank">recent research</a> charts a promising path forward: cryptographically secure environments where both model weights and evaluation data can remain encrypted throughout evaluation and stored privately when not in evaluation. However, this shift towards privatized evaluation must be balanced with transparency, which creates the need for independent auditing organizations to verify the quality and integrity of these evaluations. Initiatives like <a href="https://scale.com/leaderboard" target="_blank">Scale.AI’s SEAL</a> and <a href="https://simple-bench.com/" target="_blank">AIExplained’s SimpleBench</a> are good examples of this.</li>
+                <li><strong>Including GUIDs / Canary Strings in Benchmark Data</strong><a href="#fn1" class="footnote-ref" id="fnref1">[1]</a> <strong> in Benchmark Data:</strong> <a href="https://github.com/google/BIG-bench" target="_blank">BigBench</a> introduced an effective approach to preventing data contamination by including canary strings as unique global identifiers, or digital fingerprints, for benchmark questions to allow for easy detection during data scrubbing and filtration when designing test datasets for LMs.</li>
+                <li><strong>Functional / Compositional Benchmarks: </strong>We must shift our focus to benchmarks that evaluate true reasoning capabilities rather than rewarding models that exploit irrelevant memorized patterns. The key lies in creating evaluations that test models with questions that are sufficiently <strong>out-of-distribution</strong> from other questions in training sets they’ve already seen. This can manifest in various ways. One approach is to functionalize datasets, as done with <a href="https://arxiv.org/abs/2410.05229v1" target="_blank">GSM-Symbolic</a>, in which irrelevant factors like character names / proper nouns or irrelevant problem details are sampled to create a unique and different evaluation, while keeping the core reasoning task the same. Other approaches can involve the composition of previously observed patterns learned in training into new and unseen patterns during evaluation time. Examples of benchmarks testing this thesis include <a href="https://arxiv.org/abs/2404.04232" target="_blank">CompCMTG</a> and <a href="https://arxiv.org/abs/2406.17038" target="_blank">modeLing.</a></li>
+            </ol>
+            <h3>On Bolstering Reproducibility:</h3>
+            <ol>
+                <li><strong>Standardizing Reproducibility Standards</strong>The path to reproducible benchmarking demands explicit documentation of every evaluation detail, from hyperparameters to prompts used. This level of transparency cannot be optional; it must become a fundamental requirement for both benchmark released and research papers utilizing these benchmarks. Emerging frameworks like <a href="https://inspect.ai-safety-institute.org.uk/" target="_blank">InspectAI</a> allow for this data to get standardized, creating accessible implementation pipelines to ensure for exact benchmark reproduction moving forward. </li>
+            </ol>
+        </article>
+        <section class="footnotes">
+            <h4>Footnotes</h4>
+            <ol>
+                <li id="fn1">
+                    <strong>Canary Strings:</strong> Unique identifiers embedded in data to detect contamination or unauthorized access. 
+                    <a href="#fnref1" class="footnote-ref" aria-label="Back to reference 1">↩</a>
+                </li>
+            </ol>
+        </section>
+    </main>
+
+</body>
+</html>
