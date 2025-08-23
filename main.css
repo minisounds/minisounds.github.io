@@ -123,10 +123,37 @@ nav {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     transition: transform 0.2s ease-in-out;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
 }
 
-.project-card h3 {
+.project-image {
+    flex: 0 0 140px;
+    padding: 0.75rem;
+}
+
+.project-image img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: var(--background-color);
+}
+
+.project-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.project-content h3 {
     margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+.project-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 /* Conference tag style */
@@ -383,6 +410,21 @@ nav {
         padding: 1rem var(--horizontal-padding);
     }
 
+    .project-card {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .project-image {
+        flex: 0 0 auto;
+        align-self: center;
+    }
+
+    .project-image img {
+        width: 115px;
+        height: 115px;
+    }
+
     .blog-posts,
     .blog-post {
         padding: 0 1rem;
@@ -433,6 +475,12 @@ nav {
 
     .project-card {
         padding: 1.25rem;
+        gap: 1rem;
+    }
+
+    .project-image img {
+        width: 95px;
+        height: 95px;
     }
 
     .social-links {
