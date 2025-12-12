@@ -59,7 +59,7 @@
                 as well as the current 3-step framework I've arrived at that I find to be most effective (and fun!) for building a robust, practical intuition in AI/ML efficiently. 
             </p>
 
-            <h2>What NOT to Do When Learning AI/ML Concepts</h2>
+            <h2>3 Common Mistakes</h2>
 
             <h3>1. Don't Go Straight to the Papers</h3>
             <p>
@@ -68,48 +68,110 @@
 
             <h3>2. Don't Go to the Survey Papers, Either</h3>
             <p>
-                While a step in the right direction from reading frontier papers, in my experience, frontier papers still assume some level of prior knowledge (whether it's math, theory, etc). They also frequently use technical jargon, whether in the form of algorithms or derivations, introducing these concepts frequently before one is ready to appreciate them.
+                While definitely a step in the right direction from reading frontier papers, in my experience, 
+                survey papers might assume too much prior knowledge (e.g. math, theory, etc) or are too general and don't provide enough detail to be useful.
+                Building robust intuition quickly requires a resource that meets you exactly where you are in terms of what you know and what you don't know, and can answer 
+                your specific questions. Survey papers are static and frequently quite long, which makes it difficult to find the information you need quickly.
             </p>
 
             <h3>3. Online Courses/Lecture Series Are Inefficient</h3>
             <p>
-                You might learn the information deeply, but completing a course frequently takes tens of hours to complete and a significant amount of energy. If you're in general a pretty busy person (student/working job), online courses take too long and are inconvenient.
+                The other popular alternative to papers is to take an online course or view a lecture series. 
+                While this might be helpful, completing a course/series frequently takes tens of hours to complete and especially for courses requires a significant amount of energy. 
+                If you're in general a pretty busy person (student/working job), these typically take too long and are inconvenient.
             </p>
 
             <h2>My 3-Step Framework for Building Intuition</h2>
             <p>
-                What we want for building intuition is something that can be done quickly (&lt; 30 min), be completely tailored to your current understanding, and builds a robust and practical foundation for you to then apply however you'd like (reading papers, implementing papers, etc). Obviously, we will use LLMs to do this. But exactly how to do this efficiently is less clear. After sinking probably 100+ hours into experimenting with this, here's the framework I've arrived at that I find to be most effective (and fun!)
+                What we want for building intuition is something that can be done quickly (&lt; 30 min), be completely tailored to your current understanding, and builds a robust and practical foundation for you to then apply however you'd like (reading papers, implementing papers, etc). Obviously, we will use LLMs to do this. But exactly how to do this efficiently is less clear. After sinking probably 200+ hours into experimenting with this, here's the framework I've arrived at that I find to be most effective (and fun!)
             </p>
 
             <h3>Step 0: Create a Project</h3>
             <p>
                 Create a project (on GPT/Claude) and title it the concept you want to learn (e.g. "Variational Inference" or "Transformers"). This allows you to both organize your understanding neatly but also to enable project-local memory (in case one chat gets too long, Claude/ChatGPT will remember it for you in future conversations).
             </p>
+            <figure>
+                <img src="../media/blog/ai_intuition/project.png" alt="Claude Project Example for building high-level intuition" class="blog-content-image">
+                <figcaption class="image-caption"><em>Example of a Claude project set-up I'm actively using right now.</em></figcaption>
+            </figure>
 
             <h3>Step 1: Build High Level Intuition</h3>
             <p>
                 Your first goal is to gain a high level intuition of the concept. Throw out all math, logic, and technical jargon out of the window. Ask the model to explain a concept to you like you're twelve. Here's a prompt I like to use with some prompting tricks I've found useful highlighted:
             </p>
-            <img src="../media/blog/ai_intuition/prompt1.png" alt="Example prompt for building high-level intuition" class="blog-content-image">
+            <button class="clickable-prompt-image" data-prompt="I want to learn [concept + description of what you want to learn]. Help me sharpen my intuition on this concept from a high level. Avoid technical jargon in your explanation, explaining to me as if I were 12. Further, think about how to structure your explanation to flow smoothly and logically in a way that promotes understanding and clarity." aria-label="Click to copy prompt">
+                <img src="../media/blog/ai_intuition/prompt1.png" alt="Example prompt for building high-level intuition" class="blog-content-image">
+            </button>
 
             <h3>Step 2: Rapidly Identify Holes in Your Intuition and Fill Them</h3>
             <p>
                 Ask any follow-up questions you have. Then, once you feel like you've gotten a basic grasp, try re-explaining the concept back to the LLM from scratch. Ask the LLM to identify any inaccuracies in your explanation or key missing pieces of the intuition that you missed. You might also find that in re-explaining this concept, a series of new follow up questions might come up. Save these and maybe even ask them first before resuming your explanation of the concept.
             </p>
-            <img src="../media/blog/ai_intuition/prompt2.png" alt="Example prompt for identifying holes in intuition" class="blog-content-image">
+            <button class="clickable-prompt-image" data-prompt="I want to solidify my grasp of the concept by explaining it back to you. Below is an explanation that reflects my current understanding of [concept]. Please read through my explanation, identifying any inaccuracies in my explanation or any missing points from my intuition I might be lacking." aria-label="Click to copy prompt">
+                <img src="../media/blog/ai_intuition/prompt2.png" alt="Example prompt for identifying holes in intuition" class="blog-content-image">
+            </button>
 
             <h3>Step 3: Make Learning Multimodal</h3>
             <p>
                 After going through the Feynman loop a couple of times (explaining the concept, realizing what parts of the concept you don't understand, then explaining again), it's time to go one step further by making your learning multimodal. Ask the model to implement the concept in annotated, interpretable code. Or ask it to introduce you to the core mathematical derivations / formulas. Doing this has helped me bridge the gap between high level concept and practical, working level understanding that makes my understanding of the concept even more robust.
             </p>
-            <img src="../media/blog/ai_intuition/prompt3.png" alt="Example prompt for making learning multimodal" class="blog-content-image">
+            <button class="clickable-prompt-image" data-prompt="I want to fuse this high level understanding of [concept] with code. Walk me through some basic [classes / training loop] designs that showcases how [concept] is trained/built/etc. Make the code clean, interpretable, and annotated with comments connecting the code to the intuitions we built." aria-label="Click to copy prompt">
+                <img src="../media/blog/ai_intuition/prompt3.png" alt="Example prompt for making learning multimodal" class="blog-content-image">
+            </button>
 
             <h2>Now You're Ready to Move Forward</h2>
             <p>
                 That's it! Now you are ready to move forward as you please: read the frontier papers (they should now seem 10x less intimidating and 10x more insightful!), implement the concept/papers yourself from scratch, or start thinking about research tests you'd be curious to run given any ideas that popped up into your head.
             </p>
+            <br><br>
+            <p>
+                <strong>Many thanks to <a href="https://aarushsah.com/">Aarush Sah</a> for his thoughts and feedback while drafting this post.</strong> 
+            </p>
         </article>
     </main>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+        // Copy to clipboard functionality
+        document.querySelectorAll('.clickable-prompt-image').forEach(button => {
+            button.addEventListener('click', async function() {
+                const promptText = this.getAttribute('data-prompt');
+                
+                try {
+                    await navigator.clipboard.writeText(promptText);
+                    showToast('Prompt copied to clipboard!');
+                } catch (err) {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = promptText;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        showToast('Prompt copied to clipboard!');
+                    } catch (fallbackErr) {
+                        showToast('Failed to copy. Please try again.');
+                    }
+                    document.body.removeChild(textArea);
+                }
+            });
+        });
+
+        // Toast notification function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
 
 </body>
 </html>

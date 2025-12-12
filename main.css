@@ -356,6 +356,97 @@ nav {
     border: 2px solid black;
 }
 
+/* Figure styling to match blog post width */
+figure {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+/* Reduce bottom margin for images inside figures (with captions) */
+figure .blog-content-image {
+    margin-bottom: 0.25rem;
+}
+
+/* Image caption styling */
+.image-caption {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 0.0rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+/* Clickable prompt image styling */
+.clickable-prompt-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 2rem auto;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.clickable-prompt-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.clickable-prompt-image::before {
+    content: 'Click to copy prompt';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.clickable-prompt-image:hover::before {
+    opacity: 1;
+}
+
+
+/* Toast notification styling */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--text-color);
+    color: var(--background-color);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
 /* Footnotes section styling */
 .footnotes {
     max-width: 700px;
@@ -485,6 +576,18 @@ nav {
 
     .social-links a {
         margin: 0.5rem;
+    }
+
+    .toast {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        transform: translateX(0) translateY(100px);
+        max-width: calc(100% - 2rem);
+    }
+
+    .toast.show {
+        transform: translateX(0) translateY(0);
     }
 }
 
