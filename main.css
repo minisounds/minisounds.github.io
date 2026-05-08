@@ -2,7 +2,7 @@
     --background-color: #e8e6e3;
     --text-color: #333;
     --link-color: #1a1a1a;
-    --max-width: 800px;
+    --max-width: 1000px;
     --horizontal-padding: 2rem;
     --nav-width: 1200px;
     --card-background: #dbd9d6;
@@ -10,7 +10,7 @@
 
 /* Base Styles */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Libre Baskerville', Georgia, serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -100,7 +100,7 @@ nav {
 }
 
 .profile-image {
-    flex: 0 0 300px;
+    flex: 0 0 380px;
 }
 
 .profile-image img {
