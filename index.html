@@ -27,20 +27,19 @@
                 <img src="media/pfp2.png" alt="Your professional photo">
             </div>
             <div class="profile-content">
-                <h1>Jason Zhang</h1>
-                <div class="location">Stanford, CA, US</div>
-                <p>
-                    Hi! I'm Jason, a Junior at Stanford focused on building AI systems that work reliably in the real world. Right now, I'm thinking about how to design robust evaluations for complex agent harnesses.
+                <h1 class="typing-heading"><span class="typing-text" aria-label="Hi, I'm Jason!"></span><span class="typing-cursor" aria-hidden="true"></span></h1>
+                <p class="reveal-on-typed">
+                    I'm currently a Junior at Stanford focused on building AI systems that work reliably in the real world. Right now, I'm thinking about how to design robust evaluations for complex agent harnesses.
                     Previously, I worked on the ML Research Team at <a href="https://lambda.ai/research" target="_blank">Lambda Labs</a> on multimodal pretraining, and at the <a href="https://ai.stanford.edu/" target="_blank">Stanford AI Lab</a> on interpretability.
                     I also serve as the President of the <a href="https://www.stanfordai.club/" target="_blank">Stanford AI Club</a>, where we've hosted awesome speakers like Sam Altman, Jeff Dean, Guillermo Rauch, and more.
                 </p>
-                <p>
+                <p class="reveal-on-typed">
                     On the side, I love to cook! I run a supper club at Stanford and keep a log of what I cook here at <a href="https://www.instagram.com/sizzle_with_jason/" target="_blank">@sizzle_with_jason</a> on Instagram.
                 </p>
             </div>
         </section>
 
-        <section class="featured-projects">
+        <section class="featured-projects reveal-on-typed">
             <h2>Featured Projects</h2>
             
             <div class="project-card">
@@ -93,7 +92,7 @@
         
         </section>
 
-        <section class="writing">
+        <section class="writing reveal-on-typed">
             <h2>Writing</h2>
 
             <div class="blog-post-card">
@@ -119,7 +118,7 @@
             </div>
         </section>
 
-        <section class="social-links">
+        <section class="social-links reveal-on-typed">
             <a href="https://scholar.google.com/citations?user=LY1rce8AAAAJ&hl=en&authuser=1" target="_blank">Google Scholar</a>
             <a href="https://x.com/minisounds" target="_blank">Twitter</a>
             <a href="https://github.com/minisounds" target="_blank">GitHub</a>
@@ -127,5 +126,28 @@
             <a href="mailto:jasonbz@stanford.edu" target="_blank">Email</a>
         </section>
     </main>
+    <script>
+        (function() {
+            const target = document.querySelector('.typing-text');
+            if (!target) return;
+            const phrase = "Hi, I'm Jason!";
+            let i = 0;
+            function reveal() {
+                document.querySelectorAll('.reveal-on-typed').forEach(el => el.classList.add('revealed'));
+            }
+            function tick() {
+                if (i <= phrase.length) {
+                    target.textContent = phrase.slice(0, i);
+                    const justTyped = phrase[i - 1];
+                    i++;
+                    const delay = justTyped === ',' ? 450 : 90;
+                    setTimeout(tick, delay);
+                } else {
+                    reveal();
+                }
+            }
+            tick();
+        })();
+    </script>
 </body>
 </html>

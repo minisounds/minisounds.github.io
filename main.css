@@ -111,7 +111,7 @@ nav {
 
 .profile-content h1 {
     margin-top: 0;
-    font-size: 2rem;
+    font-size: 2.75rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -119,6 +119,38 @@ nav {
 .profile-content .location {
     color: #666;
     margin-bottom: 1rem;
+}
+
+.typing-heading {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: baseline;
+    min-height: 1.2em;
+}
+
+.reveal-on-typed {
+    opacity: 0;
+    transition: opacity 1.6s ease;
+}
+
+.reveal-on-typed.revealed {
+    opacity: 1;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.05em;
+    background-color: var(--text-color);
+    margin-left: 4px;
+    transform: translateY(0.15em);
+    animation: typing-cursor-blink 1s steps(2, start) infinite;
+}
+
+@keyframes typing-cursor-blink {
+    to {
+        visibility: hidden;
+    }
 }
 
 /* Featured Projects Styles */
