@@ -222,6 +222,24 @@ nav {
     text-decoration: underline;
 }
 
+.site-footer {
+    margin-top: 4rem;
+    padding: 2rem var(--horizontal-padding);
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.site-footer a {
+    color: #888;
+    text-decoration: none;
+    border-bottom: 1px solid #bbb;
+}
+
+.site-footer a:hover {
+    color: #555;
+}
+
 /* Blog Post Styling */
 .coming-soon-container {
     display: flex;
